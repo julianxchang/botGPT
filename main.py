@@ -3,7 +3,7 @@ import discord
 import responses
 
 
-openai.api_key = "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"
+openai.api_key = ""
 def response(message):
     completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": message}])
     return completion.choices[0].message.content
