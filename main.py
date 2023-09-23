@@ -12,7 +12,7 @@ async def send_message(message, response):
     await message.channel.send(response)
 
 def run_bot():
-    TOKEN = 'MTEyMTM1NjA5NTMxNTc3NTU1OA.GkIyEt.v0CCdILC9CkGjtRsOUBJ89KECFjukfZBxi2SbY'
+    TOKEN = ''
     intents = discord.Intents.default()
     intents.message_content = True
     client  = discord.Client(intents=intents)
