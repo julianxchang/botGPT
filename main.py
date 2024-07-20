@@ -1,18 +1,32 @@
-import openai
+from openai import OpenAI
 import discord
-import responses
+from dotenv import load_dotenv
+import os
+from groq import Groq
 
+load_dotenv()
+#Ensure the API keys are loaded correctly
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+DISCORD_API_KEY = os.getenv("DISCORD_API_KEY")
 
-openai.api_key = ""
+groq_client = Groq()
+
 def response(message):
-    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": message}])
+    completion = groq_client.chat.completions.create(
+        messages=[
+            {"role": "user", 
+             "content": message,
+             }
+        ],
+        model="llama3-8b-8192"
+    )
     return completion.choices[0].message.content
 
 async def send_message(message, response):
     await message.channel.send(response)
 
 def run_bot():
-    TOKEN = ''
+    TOKEN = DISCORD_API_KEY
     intents = discord.Intents.default()
     intents.message_content = True
     client  = discord.Client(intents=intents)
